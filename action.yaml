@@ -1,4 +1,6 @@
-name: Install yq
+name: 'Setup yq environment'
+description: 'GitHub Action to setup the `jq` and `yq` command for yaml and json parsing'
+author: 'shiipou'
 
 runs:
   using: "composite"
