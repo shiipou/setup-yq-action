@@ -12,7 +12,7 @@ jobs:
   parse_yaml:
     name: Parse Yaml
     runs-on: ubuntu-latest
-    steps
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install yq
