@@ -1,0 +1,14 @@
+name: Install yq
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install yq
+      shell: bash
+      en:v
+        PARAMS: '${{ inputs.params }}'
+      run: |
+        if [ $(whereis pip | cut -d":" -f2) ]; then
+          apt update && apt install -y python3 python3-pip
+        fi
+        pip3 install jq yq
