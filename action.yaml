@@ -7,7 +7,7 @@ runs:
   steps:
     - name: Install yq
       shell: bash
-      en:v
+      env:
         PARAMS: '${{ inputs.params }}'
       run: |
         if [ $(whereis pip | cut -d":" -f2) ]; then
