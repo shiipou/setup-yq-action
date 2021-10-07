@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Install yq
         id: setup-yq
-        uses: shiipou/setup-yq-action@v1
+        uses: shiipou/setup-yq-action@v2.0.1
       - name: get version
         run: |
           ${{ steps.setup_yq.outputs.yq-binary }} '.dependency.my_component.git.ref' pubspec.yaml
