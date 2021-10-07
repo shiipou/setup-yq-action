@@ -2,6 +2,10 @@ name: 'Setup yq environment'
 description: 'GitHub Action to setup the `jq` and `yq` command for yaml and json parsing'
 author: 'shiipou'
 
+outputs:
+  yq_binary:
+    description: 'The pinary path for the yq command'
+
 runs:
   using: "composite"
   steps:
@@ -11,6 +15,9 @@ runs:
         PARAMS: '${{ inputs.params }}'
       run: |
         if [ $(whereis pip | cut -d":" -f2) ]; then
-          apt update && apt install -y python3 python3-pip
+          apt update && apt install -y jq golang
         fi
-        pip3 install jq yq
+        
+        GO111MODULE=on go get github.com/mikefarah/yq/v4
+        
+        echo "::set-output name=yq_binary::${HOME}/go/bin/yq"
