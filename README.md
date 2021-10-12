@@ -20,5 +20,5 @@ jobs:
         uses: shiipou/setup-yq-action@v2.0.1
       - name: get version
         run: |
-          ${{ steps.setup_yq.outputs.yq-binary }} '.dependency.my_component.git.ref' pubspec.yaml
+          VERSION=$(${{ steps.setup-yq.outputs.yq-binary }} '.dependency.my_component.git.ref' pubspec.yaml)
 ```
