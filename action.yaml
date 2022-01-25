@@ -15,21 +15,9 @@ runs:
       shell: bash
       env:
         PARAMS: '${{ inputs.params }}'
-        GO_VERSION: 1.17.6
+        BINARY: 'yq_linux_amd64'
+        VERSION: 'v4.17.2'
       run: |
-        curl -sSLo go.tar.gz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-        tar -xzf go.tar.gz
-        rm go.tar.gz
-        
-        echo "PATH=${PATH}:${PWD}/go/bin" >> $GITHUB_ENV
-        
-        go version
-        
-        sudo unlink /usr/bin/go
-        sudo ln -s $PWD/go/bin/go /usr/bin/go
-        
-        go version
-        
-        GO111MODULE=on go get github.com/mikefarah/yq/v4
-        
+        curl -sSLo /usr/bin/yq https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}
+        chmod +x /usr/bin/yq
         echo "::set-output name=yq-binary::${PWD}/go/bin/yq"
