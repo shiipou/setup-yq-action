@@ -25,7 +25,7 @@ runs:
         
         go version
         
-        sudo unlink /usr/bin/go
+        sudo rm -rf /usr/bin/go
         sudo ln -s $PWD/go /usr/bin/go
         
         go version
