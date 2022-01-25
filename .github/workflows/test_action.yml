@@ -1,0 +1,19 @@
+name: Test action
+on:
+  push:
+      
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Try yq installation
+        id: setup-yq
+        uses: ./
+      - name: test if go is present
+        run: go version
+      - name: test if yq is present
+        run: ${{ steps.setup-yq.outputs.yq-binary }} --version
