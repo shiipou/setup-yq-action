@@ -15,8 +15,15 @@ runs:
       shell: bash
       env:
         PARAMS: '${{ inputs.params }}'
+        GO_VERSION: 1.17.6
       run: |
-        apt update && apt install -y jq golang
+        curl -sSLo go.tar.gz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+        tar -C /usr/local -xzf go.tar.gz
+        rm go.tar.gz
+        
+        echo "PATH=${PATH}:/usr/local/go/bin" >> $GITHUB_ENV
+        
+        go version
         
         GO111MODULE=on go get github.com/mikefarah/yq/v4
         
