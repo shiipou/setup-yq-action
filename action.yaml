@@ -25,8 +25,8 @@ runs:
         
         go version
         
-        unlink /usr/bin/go
-        ln -s $PWD/go /usr/bin/go
+        sudo unlink /usr/bin/go
+        sudo ln -s $PWD/go /usr/bin/go
         
         go version
         
