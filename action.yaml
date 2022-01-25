@@ -16,9 +16,7 @@ runs:
       env:
         PARAMS: '${{ inputs.params }}'
       run: |
-        if [ $(whereis pip | cut -d":" -f2) ]; then
-          apt update && apt install -y jq golang
-        fi
+        apt update && apt install -y jq golang
         
         GO111MODULE=on go get github.com/mikefarah/yq/v4
         
