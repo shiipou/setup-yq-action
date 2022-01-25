@@ -13,7 +13,5 @@ jobs:
       - name: Try yq installation
         id: setup-yq
         uses: ./
-      - name: test if go is present
-        run: go version
       - name: test if yq is present
-        run: ${{ steps.setup-yq.outputs.yq-binary }} --version
+        run: yq --version
