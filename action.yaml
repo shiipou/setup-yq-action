@@ -24,7 +24,8 @@ runs:
         echo "PATH=${PATH}:${PWD}/go/bin" >> $GITHUB_ENV
         
         go version
-                
+        
+        unlink /usr/bin/go
         ln -s $PWD/go /usr/bin/go
         
         go version
