@@ -20,4 +20,4 @@ runs:
       run: |
         curl -sSLo /usr/bin/yq https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}
         chmod +x /usr/bin/yq
-        echo "::set-output name=yq-binary::${PWD}/go/bin/yq"
+        echo "::set-output name=yq-binary::/usr/bin/yq"
