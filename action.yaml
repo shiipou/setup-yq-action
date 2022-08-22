@@ -2,9 +2,14 @@ name: 'Setup yq environment'
 description: 'GitHub Action to setup the `jq` and `yq` command for yaml and json parsing'
 author: 'shiipou'
 
+inputs:
+  output-path:
+    description: 'The binary path for the yq command'
+    required: false
+    default: ${{ github.workspace }}/bin/yq
 outputs:
   yq-binary:
-    description: 'The pinary path for the yq command'
+    description: 'The binary path for the yq command'
     value: ${{ steps.install-yq.outputs.yq-binary }}
     
 runs:
@@ -14,10 +19,18 @@ runs:
       id: install-yq
       shell: bash
       env:
-        PARAMS: '${{ inputs.params }}'
+        OUTPUT_PATH: '${{ inputs.output-path }}'
         BINARY: 'yq_linux_amd64'
         VERSION: 'v4.17.2'
       run: |
-        curl -sSLo /usr/bin/yq https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}
-        chmod +x /usr/bin/yq
-        echo "::set-output name=yq-binary::/usr/bin/yq"
+        echo "::group::Downloading CURL"
+        echo "Downloading CURL to ${OUTPUT_PATH}"
+        DIRECTORY="$(dirname ${OUTPUT_PATH})"
+        mkdir -p "${DIRECTORY}"
+        curl -sSLo "${OUTPUT_PATH}" https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}
+        echo "::endgroup::"
+        echo "::group::Make CURL executable"
+        chmod +x "${OUTPUT_PATH}"
+        echo "PATH=${PATH}:${DIRECTORY}" >> $GITHUB_ENV
+        echo "::endgroup::"
+        echo "::set-output name=yq-binary::${OUTPUT_PATH}"
