@@ -3,6 +3,10 @@ description: 'GitHub Action to setup the `jq` and `yq` command for yaml and json
 author: 'shiipou'
 
 inputs:
+  version:
+    description: 'YQ version to use'
+    required: false
+    default: 'v4.17.2'
   output-path:
     description: 'The binary path for the yq command'
     required: false
@@ -21,7 +25,7 @@ runs:
       env:
         OUTPUT_PATH: '${{ inputs.output-path }}'
         BINARY: 'yq_linux_amd64'
-        VERSION: 'v4.17.2'
+        VERSION: '${{ inputs.version }}'
       run: |
         echo "::group::Downloading CURL"
         echo "Downloading CURL to ${OUTPUT_PATH}"
