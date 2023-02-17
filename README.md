@@ -1,5 +1,5 @@
 # setup-yq-action
-GitHub Action to setup the `jq` and `yq` command for yaml and json parsing
+GitHub Action to setup `yq` command for yaml and json parsing
 
 
 Example of use :
